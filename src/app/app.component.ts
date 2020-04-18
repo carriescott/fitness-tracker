@@ -13,4 +13,21 @@ export class AppComponent {
   title = 'fitness-tracker';
   openSidenav = false;
 
+  links: [
+    {
+      name: 'Signup',
+      link: '/signup',
+      icon: 'face'
+    },
+    {
+      name: 'Login',
+      link: '/login',
+      icon: 'face'
+    },
+    {
+      name: 'Training',
+      link: '/training',
+      icon: 'face'
+    }
+  ];
 }
