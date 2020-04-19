@@ -20,6 +20,7 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { SidnavListComponent } from './navigation/sidnav-list/sidnav-list.component';
 import {StopTrainingComponent} from './training/current-training/stop-training.component';
 import {AuthService} from './auth/auth.service';
+import {TrainingService} from './training/training.service';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {AuthService} from './auth/auth.service';
     ReactiveFormsModule
   ],
   // ensures the same instance of service is used across the entire app
-  providers: [AuthService],
+  providers: [AuthService,
+  TrainingService],
   bootstrap: [AppComponent],
   entryComponents: [StopTrainingComponent]
 })
