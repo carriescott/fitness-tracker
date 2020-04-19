@@ -18,6 +18,8 @@ import { PastTrainingsComponent } from './training/past-trainings/past-trainings
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidnavListComponent } from './navigation/sidnav-list/sidnav-list.component';
+import {StopTrainingComponent} from './training/current-training/stop-training.component';
+import {AuthService} from './auth/auth.service';
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { SidnavListComponent } from './navigation/sidnav-list/sidnav-list.compon
     PastTrainingsComponent,
     WelcomeComponent,
     HeaderComponent,
-    SidnavListComponent
+    SidnavListComponent,
+    StopTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,9 @@ import { SidnavListComponent } from './navigation/sidnav-list/sidnav-list.compon
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  // ensures the same instance of service is used across the entire app
+  providers: [AuthService],
+  bootstrap: [AppComponent],
+  entryComponents: [StopTrainingComponent]
 })
 export class AppModule { }
