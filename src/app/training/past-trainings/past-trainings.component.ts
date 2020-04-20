@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Exercise} from '../exercise.model';
 import {TrainingService} from '../training.service';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -11,7 +12,7 @@ import {MatPaginator} from '@angular/material/paginator';
   templateUrl: './past-trainings.component.html',
   styleUrls: ['./past-trainings.component.css']
 })
-export class PastTrainingsComponent implements OnInit, AfterViewInit {
+export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   displayedColumns = [
     'date',
@@ -23,6 +24,7 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit {
 
   // expects to get an array
   dataSource = new MatTableDataSource<Exercise>();
+  private finishedExerciseSubscription: Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,10 +32,12 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit {
   constructor(private trainingService: TrainingService) {}
 
   ngOnInit(): void {
-    this.dataSource.data = this.trainingService.getCompletedOrCanceledExercises();
-    console.log('dataSource', this.dataSource.data);
-  // console.log('dataSource', this.dataSource);
-  // this.dataSource.data = data;
+    this.finishedExerciseSubscription = this.trainingService.finishedExercisesChanged
+      .subscribe((exercises: Exercise[]) => {
+        console.log('exercises', exercises);
+        this.dataSource.data = exercises;
+      });
+    this.trainingService.fetchCompletedOrCanceledExercises();
   }
 
   ngAfterViewInit(): void {
@@ -44,6 +48,10 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit {
   filter(filter: string) {
     // trim removes white space
     this.dataSource.filter = filter.trim().toLocaleLowerCase();
+  }
+
+  ngOnDestroy(): void {
+    this.finishedExerciseSubscription.unsubscribe();
   }
 
 }

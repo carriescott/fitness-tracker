@@ -22,6 +22,13 @@ import {StopTrainingComponent} from './training/current-training/stop-training.c
 import {AuthService} from './auth/auth.service';
 import {TrainingService} from './training/training.service';
 
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
+
+
 
 @NgModule({
   declarations: [
@@ -44,7 +51,10 @@ import {TrainingService} from './training/training.service';
     AppRoutingModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   // ensures the same instance of service is used across the entire app
   providers: [AuthService,
