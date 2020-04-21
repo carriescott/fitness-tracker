@@ -7,34 +7,9 @@ import {AuthService} from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  // @ViewChild('sidenav')
-  // onToggle() {
-  // }
-
   constructor(private authService: AuthService) {
   }
-
   title = 'fitness-tracker';
-  openSidenav = false;
-
-  links: [
-    {
-      name: 'Signup',
-      link: '/signup',
-      icon: 'face'
-    },
-    {
-      name: 'Login',
-      link: '/login',
-      icon: 'face'
-    },
-    {
-      name: 'Training',
-      link: '/training',
-      icon: 'face'
-    }
-  ];
-
   ngOnInit(): void {
     this.authService.initAuthListener();
   }
