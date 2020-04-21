@@ -1,10 +1,10 @@
-import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, CanLoad} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
+import {Router, Route} from '@angular/router';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanLoad {
 
   constructor(private authService: AuthService,
               private router: Router) {
@@ -19,6 +19,18 @@ export class AuthGuard implements CanActivate {
       console.log('logged out');
       this.router.navigate(['/login']);
     }
+  }
+
+  canLoad(route: Route) {
+    if (this.authService.isAuth()) {
+      console.log('logged in');
+      console.log('unknown', this.authService.isAuth());
+      return true;
+    } else {
+      console.log('logged out');
+      this.router.navigate(['/login']);
+    }
+
   }
 
 }

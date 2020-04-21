@@ -37,8 +37,11 @@ export class TrainingService {
             const object = doc.payload.doc.data();
             return {
               id: doc.payload.doc.id,
+              // @ts-ignore
               name: object.name,
+              // @ts-ignore
               duration: object.duration,
+              // @ts-ignore
               calories: object.calories
             };
           });
