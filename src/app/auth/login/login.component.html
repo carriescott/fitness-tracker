@@ -29,7 +29,7 @@
       <mat-error *ngIf="loginForm.controls.password.errors?.required">Field must not be empty</mat-error>
     </mat-form-field>
 
-    <button *ngIf="!isLoading"
+    <button *ngIf="!(isLoading$ | async)"
       type="submit"
       mat-raised-button
       color="primary"
@@ -38,7 +38,7 @@
     </button>
 
 
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
   </form>
 </section>
 

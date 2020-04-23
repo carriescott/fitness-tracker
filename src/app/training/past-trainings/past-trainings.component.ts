@@ -1,10 +1,12 @@
-import {AfterViewInit, Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Exercise} from '../exercise.model';
 import {TrainingService} from '../training.service';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {Subscription} from 'rxjs';
+import { Store} from '@ngrx/store';
+import * as fromTraining from '../training.reducer';
 
 
 @Component({
@@ -12,7 +14,7 @@ import {Subscription} from 'rxjs';
   templateUrl: './past-trainings.component.html',
   styleUrls: ['./past-trainings.component.css']
 })
-export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class PastTrainingsComponent implements OnInit, AfterViewInit{
 
   displayedColumns = [
     'date',
@@ -24,17 +26,16 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy 
 
   // expects to get an array
   dataSource = new MatTableDataSource<Exercise>();
-  private finishedExerciseSubscription: Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private trainingService: TrainingService) {}
+  constructor(private trainingService: TrainingService,
+              private store: Store<fromTraining.State>) {}
 
   ngOnInit(): void {
-    this.finishedExerciseSubscription = this.trainingService.finishedExercisesChanged
+    this.store.select(fromTraining.getFinishedExercises)
       .subscribe((exercises: Exercise[]) => {
-        console.log('exercises', exercises);
         this.dataSource.data = exercises;
       });
     this.trainingService.fetchCompletedOrCanceledExercises();
@@ -50,10 +51,5 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy 
     this.dataSource.filter = filter.trim().toLocaleLowerCase();
   }
 
-  ngOnDestroy(): void {
-    if (this.finishedExerciseSubscription) {
-      this.finishedExerciseSubscription.unsubscribe();
-    }
-  }
 
 }

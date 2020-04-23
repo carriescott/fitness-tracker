@@ -7,7 +7,6 @@ import { MaterialModule} from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import {AuthModule} from './auth/auth.module';
-// import {TrainingModule} from './training/training.module';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -20,6 +19,8 @@ import {AngularFireModule} from 'angularfire2';
 import { environment } from '../environments/environment';
 import {UIService} from './shared/ui.service';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from './app.reducer';
 
 
 @NgModule({
@@ -35,10 +36,10 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     MaterialModule,
     AppRoutingModule,
     AuthModule,
-    // TrainingModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    StoreModule.forRoot(reducers)
   ],
   // ensures the same instance of service is used across the entire app
   providers: [AuthService,
