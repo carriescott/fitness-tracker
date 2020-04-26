@@ -1,4 +1,4 @@
-<mat-tab-group *ngIf="!(ongoingTraining$ | async)">
+<mat-tab-group *ngIf="!(ongoingTraining$ | async) && !showMap">
   <mat-tab label="New Exercise">
     <section label="Available Exercises"
              fxLayout="row"
@@ -6,7 +6,7 @@
              fxLayoutAlign="center "
              fxLayoutGap="24px">
       <app-new-training></app-new-training>
-      <app-new-run></app-new-run>
+      <app-new-run (showMap)="gotToMap($event)"></app-new-run>
     </section>
   </mat-tab>
   <mat-tab label="Past Exercises">
@@ -14,4 +14,6 @@
   </mat-tab>
 </mat-tab-group>
 
-<app-current-training *ngIf="ongoingTraining$ | async"></app-current-training>
+<app-current-training *ngIf="!showMap && ongoingTraining$ | async"></app-current-training>
+
+<app-map *ngIf="showMap && !(ongoingTraining$ | async)"></app-map>

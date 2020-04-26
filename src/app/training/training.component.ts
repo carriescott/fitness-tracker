@@ -13,12 +13,19 @@ import * as fromTraining from './training.reducer';
 export class TrainingComponent implements OnInit {
   ongoingTraining$: Observable<boolean>;
   exercise: Exercise;
+  showMap: boolean;
 
   constructor(private trainingService: TrainingService,
               private store: Store<fromTraining.State>) { }
 
   ngOnInit(): void {
     this.ongoingTraining$ = this.store.select(fromTraining.getIsTraining);
+    this.showMap = false;
+  }
+
+  gotToMap(event) {
+    this.showMap = event;
+    console.log('event', event);
   }
 
 }
