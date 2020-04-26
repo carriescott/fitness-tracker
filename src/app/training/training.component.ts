@@ -19,7 +19,6 @@ export class TrainingComponent implements OnInit {
 
   ngOnInit(): void {
     this.ongoingTraining$ = this.store.select(fromTraining.getIsTraining);
-
   }
 
 }
