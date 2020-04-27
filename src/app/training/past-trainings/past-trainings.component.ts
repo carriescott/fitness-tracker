@@ -26,6 +26,7 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit{
 
   // expects to get an array
   dataSource = new MatTableDataSource<Exercise>();
+  routes;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,6 +40,13 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit{
         this.dataSource.data = exercises;
       });
     this.trainingService.fetchCompletedOrCanceledExercises();
+
+    this.store.select(fromTraining.getRoutesRun)
+      .subscribe((routes => {
+        this.routes = routes;
+        console.log(this.routes);
+      }));
+    this.trainingService.fetchRunningRoutes();
   }
 
   ngAfterViewInit(): void {

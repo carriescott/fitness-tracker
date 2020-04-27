@@ -92,4 +92,8 @@ export class MapComponent implements OnInit {
     console.log('run', run);
     this.trainingService.addRun(run);
   }
+
+  fetchRunningRoutes() {
+    this.trainingService.fetchRunningRoutes();
+  }
 }

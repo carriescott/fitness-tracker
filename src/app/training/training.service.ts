@@ -118,7 +118,19 @@ export class TrainingService {
           //   console.log(error);
           // }
         )
-  );
+    );
+  }
+
+  fetchRunningRoutes() {
+    this.fbSubs.push(
+      this.db
+        .collection('completedRuns')
+        .valueChanges()
+        .subscribe((runs => {
+          console.log(runs);
+          this.store.dispatch(new Training.SetRoutesRun(runs));
+        }))
+    );
   }
 
   cancelSubscriptions() {
