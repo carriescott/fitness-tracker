@@ -13,6 +13,7 @@ import {trainingReducer} from './training.reducer';
 import { NewRunComponent } from './new-run/new-run.component';
 import { MapComponent } from './map/map.component';
 import {GoogleMapsModule} from '@angular/google-maps';
+import { PastRunsComponent } from './past-runs/past-runs.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {GoogleMapsModule} from '@angular/google-maps';
     PastTrainingsComponent,
     StopTrainingComponent,
     NewRunComponent,
-    MapComponent
+    MapComponent,
+    PastRunsComponent
   ],
   imports: [
     SharedModule,

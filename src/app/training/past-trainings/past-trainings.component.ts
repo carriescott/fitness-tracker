@@ -4,7 +4,6 @@ import {Exercise} from '../exercise.model';
 import {TrainingService} from '../training.service';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
-import {Subscription} from 'rxjs';
 import { Store} from '@ngrx/store';
 import * as fromTraining from '../training.reducer';
 
@@ -41,12 +40,12 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit{
       });
     this.trainingService.fetchCompletedOrCanceledExercises();
 
-    this.store.select(fromTraining.getRoutesRun)
-      .subscribe((routes => {
-        this.routes = routes;
-        console.log(this.routes);
-      }));
-    this.trainingService.fetchRunningRoutes();
+    // this.store.select(fromTraining.getRoutesRun)
+    //   .subscribe((routes => {
+    //     this.routes = routes;
+    //     console.log(this.routes);
+    //   }));
+    // this.trainingService.fetchRunningRoutes();
   }
 
   ngAfterViewInit(): void {

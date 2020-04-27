@@ -12,6 +12,9 @@
   <mat-tab label="Past Exercises">
     <app-past-trainings></app-past-trainings>
   </mat-tab>
+  <mat-tab label="Past Runs">
+    <app-past-runs></app-past-runs>
+  </mat-tab>
 </mat-tab-group>
 
 <app-current-training *ngIf="!showMap && ongoingTraining$ | async"></app-current-training>
