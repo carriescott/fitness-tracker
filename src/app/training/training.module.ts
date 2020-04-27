@@ -12,6 +12,7 @@ import {TrainingRoutingModule} from './training-routing.module';
 import {trainingReducer} from './training.reducer';
 import { NewRunComponent } from './new-run/new-run.component';
 import { MapComponent } from './map/map.component';
+import {GoogleMapsModule} from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MapComponent } from './map/map.component';
     SharedModule,
     ReactiveFormsModule,
     TrainingRoutingModule,
-    StoreModule.forFeature('training', trainingReducer)
+    StoreModule.forFeature('training', trainingReducer),
+    GoogleMapsModule
   ],
   exports: [],
   entryComponents: [StopTrainingComponent]

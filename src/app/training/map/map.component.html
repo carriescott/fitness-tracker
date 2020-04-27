@@ -1,1 +1,104 @@
-<p>map works!</p>
+<section class="running-map" fxLayout="row" fxLayoutAlign="center " fxLayoutGap="24px" fxFlex>
+  <google-map height="80vh"
+              width="100%"
+              [zoom]="zoom"
+              [center]="center"
+              [options]="options"
+              (mapClick)="addMarker($event)">
+    <map-marker *ngIf="marker"
+                [position]="marker.position"
+                [label]="marker.label"
+                [title]="marker.title"
+                [options]="marker.options">
+    </map-marker>
+    <map-marker
+      *ngFor="let marker of markers"
+      [position]="marker.position"
+      [label]="marker.label"
+      [title]="marker.title"
+      [options]="marker.options"
+    >
+    </map-marker>
+
+    <map-polyline [options]="polylineOptions"></map-polyline>
+  </google-map>
+
+
+  <mat-card class="running-form" fxLayout="column">
+    <mat-card-title>
+      Plot your route on the map!
+    </mat-card-title>
+    <img class="route-image"
+         src="../../../assets/img/route-solid.svg"
+         alt="Training Illustration">
+    <mat-card-content fxLayoutAlign="center">
+      <form [formGroup]="addRunForm"
+            fxLayout="column"
+            fxLayoutAlign="center center"
+            fxLayoutGap="16px">
+
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="time"
+            formControlName="time"
+            required>
+          <mat-hint>Please enter the time taken </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="distance"
+            formControlName="distance"
+            required>
+          <mat-hint>Please enter the distance run</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="text"
+            aria-label="calories"
+            matInput
+            placeholder="calories"
+            formControlName="calories"
+            required>
+          <mat-hint>Please enter the calories burned</mat-hint>
+        </mat-form-field>
+
+<!--        <mat-checkbox-->
+<!--          required-->
+<!--          formControlName="route"-->
+<!--          [checked]="route.length>1">-->
+<!--          Route has been added to map-->
+<!--        </mat-checkbox>-->
+
+
+
+<!--        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>-->
+      </form>
+
+
+
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center">
+      <button mat-button
+              type="submit"
+              (click)="saveRoute()"
+              mat-raised-button
+              color="primary">
+        Save Route
+      </button>
+      <button mat-button
+      (click)="reset()">
+        Reset
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+</section>
+
+
+

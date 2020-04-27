@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+
 
 import { MaterialModule} from './material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +40,12 @@ import {reducers} from './app.reducer';
     MaterialModule,
     AppRoutingModule,
     AuthModule,
+    GoogleMapsModule,
     FlexLayoutModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDYcpI6ve26wOhPSZVluUP6DrRoQ8BRlEc'
+    }),
+    AgmDirectionModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     StoreModule.forRoot(reducers)

@@ -1,0 +1,17 @@
+google-map {
+  width: 50%;
+}
+
+.running-map {
+  margin: 24px;
+}
+
+.running-form {
+  /*height: fit-content;*/
+}
+
+.route-image {
+  margin: 16px 0;
+  height: 8vh;
+  opactity: 0.8;
+}

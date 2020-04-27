@@ -23,6 +23,10 @@ export class TrainingService {
     this.db.collection('finishedExercises').add(exercise);
   }
 
+  private addRunDataToDatabase(run) {
+    this.db.collection('completedRuns').add(run);
+  }
+
   constructor(private db: AngularFirestore,
               private uiService: UIService,
               private store: Store<fromTraining.State>) {
@@ -63,6 +67,17 @@ export class TrainingService {
 
   startExercise(selectedId: string) {
     this.store.dispatch(new Training.StartTraining(selectedId));
+  }
+
+  // add a copy of the run object to firebase
+  addRun(run) {
+   console.log('add run');
+   this.addRunDataToDatabase(
+      {
+        ...run,
+        date: new Date(),
+        state: 'completed'
+      });
   }
 
   completeExercise() {
