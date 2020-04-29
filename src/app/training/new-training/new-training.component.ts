@@ -9,7 +9,6 @@ import {Store} from '@ngrx/store';
 import * as fromTraining from '../training.reducer';
 import * as fromRoot from '../../app.reducer';
 
-
 @Component({
   selector: 'app-new-training',
   templateUrl: './new-training.component.html',
@@ -29,7 +28,6 @@ export class NewTrainingComponent implements OnInit {
   ngOnInit(): void {
     // Async undefined at the beginning only available once the data has been returned from the server
     // this.availableExercises = this.trainingService.getAvailableExercise();
-    // console.log(this.availableExercises);
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.availableExercises$ = this.store.select(fromTraining.getAvailableExercises);
     // initialise the fetching of exercises
@@ -41,7 +39,6 @@ export class NewTrainingComponent implements OnInit {
   }
 
   onStart(form: NgForm) {
-    console.log('form', form.value.exercise);
     this.trainingService.startExercise(form.value.exercise);
   }
 

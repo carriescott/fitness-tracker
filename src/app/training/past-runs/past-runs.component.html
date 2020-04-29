@@ -1,14 +1,38 @@
-<p>past-runs works!</p>
+<section class="map" fxLayout="row" fxLayoutAlign="center " fxLayoutGap="24px" fxFlex>
+  <google-map height="74vh"
+              width="100%"
+              [zoom]="zoom"
+              [center]="center"
+              [options]="options">
+    <map-marker *ngIf="marker"
+                [position]="marker.position"
+                [label]="marker.label"
+                [title]="marker.title"
+                [options]="marker.options">
+    </map-marker>
+    <map-polyline *ngIf="selectedRoute" [options]="polylineOptions"></map-polyline>
+  </google-map>
 
-<mat-card  fxFlex.xs="100%" fxFlex="400px">
+  <mat-card  fxFlex.xs="100%" fxFlex="400px">
   <mat-card-header>
-    Previous Runs
   </mat-card-header>
   <mat-card-content>
-    <mat-list *ngIf="routes">
-      <mat-list-item *ngFor="let route of routes">
-        <p mat-line>{{route.calories}}</p>
+    <mat-list *ngIf="pastRuns" dense role="list">
+      <h3 matSubheader fxLayout="row"fxLayoutAlign="space-between center">
+        <span>{{pastRuns.length}} Previous Runs</span>
+        <span>{{totalDistance}}km</span>
+      </h3>
+      <mat-list-item *ngFor="let run of pastRuns; let i = index;"
+                     role="listitem"
+                     (click)="showRoute(i)">
+        <mat-icon matListIcon>directions_run</mat-icon>
+        <h3 matLine>{{run.distance}} km</h3>
+        <p matLine>{{run.calories}} kcal</p>
+        <p matLine>{{run.date.seconds * 1000 | date}}</p>
+        <mat-divider></mat-divider>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
 </mat-card>
+
+</section>

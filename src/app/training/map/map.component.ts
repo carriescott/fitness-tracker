@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TrainingService} from '../training.service';
+import {Run} from '../running.model';
 
 
 @Component({
@@ -11,21 +12,19 @@ import {TrainingService} from '../training.service';
 export class MapComponent implements OnInit {
   addRunForm: FormGroup;
 
-  zoom = 12
-  center: google.maps.LatLngLiteral
+  zoom = 12;
+  center: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     mapTypeId: 'roadmap',
     zoomControl: false,
     scrollwheel: true,
     disableDoubleClickZoom: true,
-    // maxZoom: 15,
-    // minZoom: 8,
   };
 
   markers = [];
   marker;
   route: google.maps.LatLngLiteral[] = [];
-  polylineOptions: google.maps.PolylineOptions;
+  polylineOptions: google.maps.PolylineOptions = {};
 
   constructor(private fb: FormBuilder,
               private trainingService: TrainingService) {
@@ -37,14 +36,12 @@ export class MapComponent implements OnInit {
       time: ['', Validators.required],
       distance: ['', Validators.required],
       calories: ['', Validators.required],
-      // route: ['', Validators.required]
     });
     navigator.geolocation.getCurrentPosition(position => {
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      console.log('center', this.center);
       this.marker = {
         position: {
           lat: this.center.lat,
@@ -66,30 +63,25 @@ export class MapComponent implements OnInit {
     const routeObject = {
       lat: latitude,
       lng: longitude
-    }
+    };
     this.markers.push(markerObject);
     this.route.push(routeObject);
     this.polylineOptions = {path: this.route, strokeColor: 'blue', strokeOpacity: 1};
   }
 
   reset() {
-    console.log('hello');
     this.markers = [];
     this.route = [];
     this.polylineOptions = {path: this.route, strokeColor: 'blue', strokeOpacity: 1};
   }
 
   saveRoute() {
-    console.log('hello');
-    console.log(this.route);
-    const run = {
-      name: this.addRunForm.value.name,
+    const run: Run = {
       time: this.addRunForm.value.time,
       distance: this.addRunForm.value.distance,
       calories: this.addRunForm.value.calories,
       route: [...this.route]
     };
-    console.log('run', run);
     this.trainingService.addRun(run);
   }
 

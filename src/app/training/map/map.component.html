@@ -20,7 +20,7 @@
     >
     </map-marker>
 
-    <map-polyline [options]="polylineOptions"></map-polyline>
+    <map-polyline *ngIf="route" [options]="polylineOptions"></map-polyline>
   </google-map>
 
 

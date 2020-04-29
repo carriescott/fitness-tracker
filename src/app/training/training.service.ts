@@ -1,4 +1,5 @@
 import {Exercise} from './exercise.model';
+import {Run} from './running.model';
 import { Injectable} from '@angular/core';
 import { Subject} from 'rxjs';
 import {map, take} from 'rxjs/operators';
@@ -8,7 +9,6 @@ import {UIService} from '../shared/ui.service';
 import {Store} from '@ngrx/store';
 import * as fromTraining from './training.reducer';
 import * as UI from '../shared/ui.actions';
-
 import * as Training from './training.actions';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class TrainingService {
     this.db.collection('finishedExercises').add(exercise);
   }
 
-  private addRunDataToDatabase(run) {
+  private addRunDataToDatabase(run: Run) {
     this.db.collection('completedRuns').add(run);
   }
 
@@ -33,7 +33,6 @@ export class TrainingService {
   }
 
   fetchAvailableExercise() {
-    // this.uiService.loadingStateChanged.next(true);
     this.store.dispatch(new UI.StartLoading());
     this.fbSubs.push(
       this.db
@@ -58,7 +57,6 @@ export class TrainingService {
           this.store.dispatch(new UI.StopLoading());
           this.store.dispatch(new Training.SetAvailableTrainings(exercises));
           }, error => {
-          // this.uiService.loadingStateChanged.next(false);
           this.store.dispatch(new UI.StopLoading());
           this.uiService.showSnackbar('Fetching  Exercises failed, please try again later', null, 3000);
           this.exercisesChanged.next(null);
@@ -71,8 +69,7 @@ export class TrainingService {
 
   // add a copy of the run object to firebase
   addRun(run) {
-   console.log('add run');
-   this.addRunDataToDatabase(
+    this.addRunDataToDatabase(
       {
         ...run,
         date: new Date(),

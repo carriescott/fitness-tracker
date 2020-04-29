@@ -7,7 +7,6 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 })
 export class NewRunComponent implements OnInit {
 
-
   @Output() showMap: EventEmitter<boolean> = new EventEmitter();
 
   constructor() { }
