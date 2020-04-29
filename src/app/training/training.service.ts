@@ -67,6 +67,14 @@ export class TrainingService {
     this.store.dispatch(new Training.StartTraining(selectedId));
   }
 
+  logRun() {
+    this.store.dispatch(new Training.StartRun());
+  }
+
+  stopLoggingRun() {
+    this.store.dispatch(new Training.StopRun());
+  }
+
   // add a copy of the run object to firebase
   addRun(run) {
     this.addRunDataToDatabase(
@@ -123,10 +131,10 @@ export class TrainingService {
       this.db
         .collection('completedRuns')
         .valueChanges()
-        .subscribe((runs => {
+        .subscribe((runs: Run[]) => {
           console.log(runs);
           this.store.dispatch(new Training.SetRoutesRun(runs));
-        }))
+        })
     );
   }
 

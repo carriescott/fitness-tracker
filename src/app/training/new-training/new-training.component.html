@@ -1,9 +1,12 @@
 <section class="new-training" fxLayout fxLayoutAlign="center">
 
   <form (ngSubmit)="onStart(exerciseForm)" #exerciseForm="ngForm">
-    <mat-card fxFlex.xs="100%" fxFlex="400px">
+    <mat-card fxFlex="400px">
 
-      <mat-card-title fxLayoutAlign="center">Time for a HIIT Workout?</mat-card-title>
+      <mat-card-title>HIIT Workout</mat-card-title>
+      <mat-card-subtitle fxLayout=row fxLayoutAlign="center center">
+        Pick from a variety of activities and challenge yourself against the clock.
+      </mat-card-subtitle>
 
       <mat-card-content fxLayoutAlign="center">
         <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>

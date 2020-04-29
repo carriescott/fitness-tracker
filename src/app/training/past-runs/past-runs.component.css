@@ -10,3 +10,15 @@ google-map {
   cursor: pointer;
   background-color: #fafafa;
 }
+
+.scroll {
+  overflow-y: scroll;
+}
+
+.running-list {
+  height: 524px;
+}
+
+.fixed {
+  position: fixed;
+}

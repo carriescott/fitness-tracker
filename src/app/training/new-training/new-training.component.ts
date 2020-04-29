@@ -26,11 +26,8 @@ export class NewTrainingComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // Async undefined at the beginning only available once the data has been returned from the server
-    // this.availableExercises = this.trainingService.getAvailableExercise();
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.availableExercises$ = this.store.select(fromTraining.getAvailableExercises);
-    // initialise the fetching of exercises
     this.fetchExercises();
   }
 

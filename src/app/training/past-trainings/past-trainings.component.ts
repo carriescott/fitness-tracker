@@ -23,7 +23,6 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit{
     'state'
   ];
 
-  // expects to get an array
   dataSource = new MatTableDataSource<Exercise>();
 
   @ViewChild(MatSort) sort: MatSort;
@@ -46,7 +45,6 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit{
   }
 
   filter(filter: string) {
-    // trim removes white space
     this.dataSource.filter = filter.trim().toLocaleLowerCase();
   }
 

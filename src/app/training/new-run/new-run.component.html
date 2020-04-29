@@ -1,17 +1,27 @@
 <section class="new-run" fxLayout fxLayoutAlign="center">
-    <mat-card fxFlex.xs="100%" fxFlex="400px">
-      <mat-card-title fxLayoutAlign="center">Let's log a run</mat-card-title>
+    <mat-card fxFlex="400px">
+
+      <mat-card-title>
+        Let's log a run
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Keep on top of your target, record a recent run and track your progress!
+      </mat-card-subtitle>
+
       <mat-card-content fxLayoutAlign="center">
         <img class="run-image"
              src="../../../assets/img/directions-run-24px.svg"
              alt="Training Illustration">
       </mat-card-content>
+
       <mat-card-actions fxLayoutAlign="center">
         <button mat-button
-        (click)="goToMap()">
+        (click)="logRun()">
           Record Run
         </button>
       </mat-card-actions>
+
     </mat-card>
 </section>
 

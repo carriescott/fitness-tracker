@@ -15,6 +15,7 @@ export class CurrentTrainingComponent implements OnInit {
 
   progress = 0;
   timer: number;
+  exercise: string;
 
   constructor(private dialog: MatDialog,
               private trainingService: TrainingService,
@@ -26,6 +27,7 @@ export class CurrentTrainingComponent implements OnInit {
 
   startOrResumeTimer() {
     this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(exercise => {
+      this.exercise = exercise.name;
       const step = exercise.duration / 100 * 1000;
       this.timer = setInterval(() => {
         this.progress = this.progress + 1;
@@ -46,7 +48,6 @@ export class CurrentTrainingComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result) {
         this.trainingService.cancelExercise(this.progress);
       } else {

@@ -12,6 +12,7 @@ import * as fromTraining from './training.reducer';
 })
 export class TrainingComponent implements OnInit {
   ongoingTraining$: Observable<boolean>;
+  loggingRun$: Observable<boolean>;
   exercise: Exercise;
   showMap: boolean;
 
@@ -20,6 +21,7 @@ export class TrainingComponent implements OnInit {
 
   ngOnInit(): void {
     this.ongoingTraining$ = this.store.select(fromTraining.getIsTraining);
+    this.loggingRun$ = this.store.select(fromTraining.IsLoggingRun);
     this.showMap = false;
   }
 

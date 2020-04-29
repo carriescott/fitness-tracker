@@ -1,4 +1,5 @@
-<section class="login-form">
+<section fxLayout="row" fxLayoutAlign="center ">
+  <mat-card class="login-form">
 
   <form [formGroup]="loginForm"
         (ngSubmit)="onSubmit()"
@@ -40,6 +41,7 @@
 
     <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
   </form>
+
+  </mat-card>
+
 </section>
-
-

@@ -1,4 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {TrainingService} from '../training.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-new-run',
@@ -9,13 +11,13 @@ export class NewRunComponent implements OnInit {
 
   @Output() showMap: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  constructor(private trainingService: TrainingService) { }
 
   ngOnInit(): void {
     this.showMap.emit(false);
   }
 
-  goToMap() {
-    this.showMap.emit(true);
-  }
+  logRun() {
+      this.trainingService.logRun();
+    }
 }

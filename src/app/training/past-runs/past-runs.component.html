@@ -13,11 +13,12 @@
     <map-polyline *ngIf="selectedRoute" [options]="polylineOptions"></map-polyline>
   </google-map>
 
-  <mat-card  fxFlex.xs="100%" fxFlex="400px">
-  <mat-card-header>
+  <mat-card fxFlex.xs="100%" fxFlex="400px" class="running-list scroll">
+  <mat-card-header class="fixed">
   </mat-card-header>
+    <mat-card-title>Past Runs</mat-card-title>
   <mat-card-content>
-    <mat-list *ngIf="pastRuns" dense role="list">
+    <mat-list *ngIf="pastRuns" dense role="list" class="scroll" >
       <h3 matSubheader fxLayout="row"fxLayoutAlign="space-between center">
         <span>{{pastRuns.length}} Previous Runs</span>
         <span>{{totalDistance}}km</span>

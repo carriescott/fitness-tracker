@@ -44,12 +44,12 @@ export class PastRunsComponent implements OnInit {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      this.marker = {
+      this.marker = new google.maps.Marker ({
         position: {
           lat: this.center.lat,
           lng: this.center.lng
         },
-      };
+      });
     });
   }
 

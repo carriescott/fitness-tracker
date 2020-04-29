@@ -23,57 +23,64 @@ export class MapComponent implements OnInit {
 
   markers = [];
   marker;
-  route: google.maps.LatLngLiteral[] = [];
-  polylineOptions: google.maps.PolylineOptions = {};
+  route: google.maps.LatLngLiteral[];
+  polylineOptions: google.maps.PolylineOptions;
 
   constructor(private fb: FormBuilder,
               private trainingService: TrainingService) {
   }
 
   ngOnInit() {
+    this.route = [];
     this.addRunForm = this.fb.group ({
-      name: [''],
       time: ['', Validators.required],
       distance: ['', Validators.required],
       calories: ['', Validators.required],
+      route: ['', Validators.required]
     });
     navigator.geolocation.getCurrentPosition(position => {
       this.center = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      this.marker = {
+      this.marker = new google.maps.Marker ({
         position: {
           lat: this.center.lat,
           lng: this.center.lng
         },
-      };
+      });
     });
   }
 
   addMarker(event: google.maps.MouseEvent) {
     const latitude = event.latLng.lat();
     const longitude = event.latLng.lng();
-    const markerObject = {
+    const marker = new google.maps.Marker ({
       position: {
-        lat: latitude,
-        lng: longitude
-      }
-    };
+        lat: this.center.lat,
+        lng: this.center.lng
+      },
+      icon: '../../../assets/img/marker-01.png'
+    });
     const routeObject = {
       lat: latitude,
       lng: longitude
     };
-    this.markers.push(markerObject);
+    this.markers.push(marker);
     this.route.push(routeObject);
-    this.polylineOptions = {path: this.route, strokeColor: 'blue', strokeOpacity: 1};
+    this.polylineOptions = {path: this.route, strokeColor: 'pink', strokeOpacity: 1};
   }
 
   reset() {
     this.markers = [];
     this.route = [];
-    this.polylineOptions = {path: this.route, strokeColor: 'blue', strokeOpacity: 1};
+    this.polylineOptions = {path: this.route, strokeColor: 'pink', strokeOpacity: 1};
   }
+
+  cancel() {
+    this.trainingService.stopLoggingRun();
+  }
+
 
   saveRoute() {
     const run: Run = {
@@ -83,9 +90,15 @@ export class MapComponent implements OnInit {
       route: [...this.route]
     };
     this.trainingService.addRun(run);
+    this.trainingService.stopLoggingRun();
+    this.resetForm();
   }
 
-  fetchRunningRoutes() {
-    this.trainingService.fetchRunningRoutes();
+  resetForm() {
+    this.route = [];
+    this.markers = [];
+    this.polylineOptions = {path: this.route, strokeColor: 'pink', strokeOpacity: 1};
+    this.addRunForm.reset();
   }
+
 }
