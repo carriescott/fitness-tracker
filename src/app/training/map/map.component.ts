@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TrainingService} from '../training.service';
+import {GoogleMap } from '@angular/google-maps';
 import {Run} from '../running.model';
-
 
 @Component({
   selector: 'app-map',
@@ -10,6 +10,7 @@ import {Run} from '../running.model';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   addRunForm: FormGroup;
 
   zoom = 12;

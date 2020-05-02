@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as fromTraining from '../training.reducer';
 import { Store} from '@ngrx/store';
 import { TrainingService } from '../training.service';
 import { Run } from '../running.model';
+import {GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'app-past-runs',
@@ -10,6 +11,7 @@ import { Run } from '../running.model';
   styleUrls: ['./past-runs.component.css']
 })
 export class PastRunsComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap
 
   zoom = 12
   center: google.maps.LatLngLiteral
