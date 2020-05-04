@@ -7,7 +7,6 @@ export interface State {
   auth: fromAuth.State;
 }
 
-// grouped reducer
 export const reducers: ActionReducerMap<State> = {
   ui: fromUi.uiReducer,
   auth: fromAuth.authReducer
@@ -15,6 +14,5 @@ export const reducers: ActionReducerMap<State> = {
 
 export const getUiState =  createFeatureSelector<fromUi.State>('ui');
 export const getIsLoading = createSelector(getUiState, fromUi.getIsLoading);
-
 export const getAuthState = createFeatureSelector<fromAuth.State>('auth');
 export const getIsAuth = createSelector(getAuthState, fromAuth.getIsAuth);

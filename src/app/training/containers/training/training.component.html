@@ -1,0 +1,56 @@
+<mat-tab-group *ngIf="!(ongoingTraining$ | async) && !(loggingRun$ | async)">
+  <mat-tab label="New Exercise">
+    <section label="Available Exercises"
+             fxLayout="row"
+             fxLayout.lt-md="column"
+             fxLayoutGap.lt-md="10px"
+             fxFill
+             fxLayoutAlign="center "
+             fxLayoutGap="24px">
+      <app-new-training
+      (submitForm)="startNewTraining($event)"
+      (fetchAvailableExercises)="fetchExercisesFromDB()"
+      [isLoading$]="isLoading$"
+      [availableExercises$]="availableExercises$">
+      </app-new-training>
+      <app-new-run
+        (startLoggingRun)="logRun()">
+      </app-new-run>
+    </section>
+  </mat-tab>
+  <mat-tab label="Past Exercises">
+    <app-past-trainings
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+      (filterDataSource)="filterDataSource($event)">
+    </app-past-trainings>
+  </mat-tab>
+  <mat-tab label="Past Runs">
+    <app-past-runs *ngIf="center"
+      [zoom]="zoom"
+      [pastRuns]="pastRuns"
+      [totalDistance]="totalDistance"
+      [options]="options"
+      [selectedRoute]="selectedRoute"
+      [polylineOptions]="polylineOptions"
+      [center]="center"
+      (showRouteIndex)="showRoute($event)">
+    </app-past-runs>
+  </mat-tab>
+</mat-tab-group>
+
+<app-current-training *ngIf="!(loggingRun$ | async) && ongoingTraining$ | async"></app-current-training>
+
+<app-map *ngIf="!(ongoingTraining$ | async) && loggingRun$ | async"
+         [zoom]="zoom"
+         [options]="options"
+         [center]="center"
+         [route]="route"
+         [markers]="markers"
+         [newRunPolylineOptions]="newRunPolylineOptions"
+         (resetRoute)="resetRoute()"
+         (addMarkerTest)="addMarker($event)"
+         (emitRoute)="saveRoute($event)"
+         (cancelRun)="cancelRun()">
+</app-map>
+

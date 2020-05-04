@@ -25,7 +25,7 @@
       [options]="marker.options">
     </map-marker>
 
-    <map-polyline *ngIf="route" [options]="polylineOptions"></map-polyline>
+    <map-polyline *ngIf="route" [options]="newRunPolylineOptions"></map-polyline>
   </google-map>
 
 
@@ -37,7 +37,7 @@
      Click on the map to plotting your running route
     </mat-card-subtitle>
     <img class="route-image"
-         src="../../../assets/img/route-solid.svg"
+         src="../../../../assets/img/route-solid.svg"
          alt="Training Illustration">
     <mat-card-content fxLayoutAlign="center">
       <form [formGroup]="addRunForm"
@@ -76,6 +76,7 @@
         </mat-form-field>
 
         <mat-checkbox
+          #checkbox
           required
           formControlName="route"
           [checked]="route.length>1"

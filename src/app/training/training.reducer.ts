@@ -8,8 +8,8 @@ import {
   STOP_TRAINING,
   TrainingActions
 } from './training.actions';
-import {Exercise} from './exercise.model';
-import {Run} from './running.model';
+import {Exercise} from './models/exercise.model';
+import {Run} from './models/running.model';
 import * as fromRoot from '../app.reducer';
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 

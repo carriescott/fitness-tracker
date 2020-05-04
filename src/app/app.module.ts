@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { GoogleMapsModule } from '@angular/google-maps';
 
-import { MaterialModule} from './material.module';
+import { MaterialModule} from './shared/modules/material.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import {AuthModule} from './auth/auth.module';
@@ -13,8 +13,8 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidnavListComponent } from './navigation/sidnav-list/sidnav-list.component';
-import {AuthService} from './auth/auth.service';
-import {TrainingService} from './training/training.service';
+import {AuthService} from './auth/services/auth.service';
+import {TrainingService} from './training/services/training.service';
 
 import {AngularFireModule} from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -42,7 +42,7 @@ import {reducers} from './app.reducer';
     AngularFirestoreModule,
     StoreModule.forRoot(reducers)
   ],
-  // ensures the same instance of service is used across the entire app
+  // ensures the same instance of services is used across the entire app
   providers: [AuthService,
   TrainingService,
   UIService],

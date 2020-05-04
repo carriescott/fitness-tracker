@@ -1,22 +1,20 @@
-import {Exercise} from './exercise.model';
-import {Run} from './running.model';
+import { Exercise } from '../models/exercise.model';
+import { Run } from '../models/running.model';
 import { Injectable} from '@angular/core';
 import { Subject} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import { AngularFirestore } from 'angularfire2/firestore';
-import {Subscription} from 'rxjs';
-import {UIService} from '../shared/ui.service';
-import {Store} from '@ngrx/store';
-import * as fromTraining from './training.reducer';
-import * as UI from '../shared/ui.actions';
-import * as Training from './training.actions';
+import { Subscription } from 'rxjs';
+import { UIService } from '../../shared/ui.service';
+import { Store } from '@ngrx/store';
+import * as fromTraining from '../training.reducer';
+import * as UI from '../../shared/ui.actions';
+import * as Training from '../training.actions';
 
 @Injectable()
 export class TrainingService {
 
   exercisesChanged = new Subject<Exercise[]>();
-  private availableExercises: Exercise[] = [];
-  private runningExercise: Exercise;
   private fbSubs: Subscription[] = [];
 
   private addDataToDatabase(exercise: Exercise) {
@@ -75,7 +73,6 @@ export class TrainingService {
     this.store.dispatch(new Training.StopRun());
   }
 
-  // add a copy of the run object to firebase
   addRun(run) {
     this.addRunDataToDatabase(
       {
@@ -119,9 +116,6 @@ export class TrainingService {
         .subscribe((exercises: Exercise[]) => {
             this.store.dispatch(new Training.SetFinishedTrainings(exercises));
           }
-          //     error => {
-          //   console.log(error);
-          // }
         )
     );
   }
@@ -132,7 +126,6 @@ export class TrainingService {
         .collection('completedRuns')
         .valueChanges()
         .subscribe((runs: Run[]) => {
-          console.log(runs);
           this.store.dispatch(new Training.SetRoutesRun(runs));
         })
     );
@@ -141,9 +134,5 @@ export class TrainingService {
   cancelSubscriptions() {
     this.fbSubs.forEach(sub => sub.unsubscribe());
   }
-
-
-
-
 
 }
