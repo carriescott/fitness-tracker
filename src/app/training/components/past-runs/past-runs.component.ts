@@ -18,7 +18,7 @@ export class PastRunsComponent implements OnInit {
   @Input() center;
   @Output() showRouteIndex = new EventEmitter<void>();
 
-  marker: google.maps.Marker;
+  marker: any;
 
   constructor() {}
 

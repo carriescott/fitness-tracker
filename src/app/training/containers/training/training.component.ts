@@ -146,6 +146,7 @@ export class TrainingComponent implements OnInit {
   }
 
   startNewTraining(form) {
+    console.log('form', form.value.exercise);
     this.trainingService.startExercise(form.value.exercise);
   }
 

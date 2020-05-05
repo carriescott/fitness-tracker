@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Input, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -12,6 +12,8 @@ export class NewTrainingComponent implements OnInit {
   @Input() availableExercises$;
   @Output() submitForm = new EventEmitter<NgForm>();
   @Output() fetchAvailableExercises = new EventEmitter<void>();
+
+  @ViewChild('exerciseForm', { static: false }) exerciseForm;
 
   constructor() {}
 
