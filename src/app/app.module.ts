@@ -43,7 +43,7 @@ import {reducers} from './app.reducer';
     GoogleMapsModule,
     FlexLayoutModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDYcpI6ve26wOhPSZVluUP6DrRoQ8BRlEc'
+      apiKey: ''
     }),
     AgmDirectionModule,
     AngularFireModule.initializeApp(environment.firebase),
