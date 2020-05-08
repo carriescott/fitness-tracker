@@ -106,9 +106,4 @@ export class TrainingService {
   cancelSubscriptions() {
     this.fbSubs.forEach(sub => sub.unsubscribe());
   }
-
-
-
-
-
 }
